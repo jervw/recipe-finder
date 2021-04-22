@@ -1,10 +1,47 @@
-Example
 <!DOCTYPE html>
 <html>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <title>Food finder</title>
+</head>
+
 <body>
+  <header>
+    <h1>Food finder</h1>
+    <form class="search">
+      <input id="inputField" type="text" placeholder="Food name" />
+      <button id="submit" type="button">Search</button>
+    </form>
+  </header>
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+  <div class="results"></div>
 
+  <script>
+    const apiKey = "0b02b34a3d03459684b2e75f78070faf";
+
+    const inputField = document.getElementById("inputField");
+    const submit = document.getElementById("submit");
+    const resultsContainer = document.querySelector("div");
+
+    function submitField(evt) {
+      resultsContainer.innerHTML = "";
+      search(inputField.value);
+    }
+
+    function search(query) {
+      fetch(
+        "https://api.spoonacular.com/recipes/complexSearch?query=" + query + "&apiKey=" + apiKey
+      )
+        .then((response) => response.text())
+        .catch((error) => console.log("error", error));
+    }
+
+    submit.addEventListener("click", submitField);
+  </script>
 </body>
+
 </html>
