@@ -8,19 +8,29 @@
 </head>
 <body>
 
-<nav class="topnav" id="myTopnav">
+<style>
+    #logo {
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+    }
+</style>
 
+<div class="topnav" id="myTopnav">
+    <a class="logo" id="logo">A-ryhmä</a>
     <a class="active" href="ajax.html">Recipes</a>
     <a href="#restaurants">Restaurants</a>
-
     <div class="search-container">
         <form action="/action_page.php">
-            <input type="text" class="searchTerm" placeholder="Search.." name="search">
-            <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
-</nav>
+</div>
 
 <script>
     function myFunction() {

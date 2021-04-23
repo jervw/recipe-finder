@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajax-tehtävä</title>
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style2.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
 
-<nav class="topnav" id="myTopnav">
-
+<div class="topnav" id="myTopnav">
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+    <a class="logo" id="logo">A-ryhmä</a>
     <a class="active" href="ajax.html">Recipes</a>
     <a href="#restaurants">Restaurants</a>
-
     <div class="search-container">
         <form action="/action_page.php">
-            <input type="text" class="searchTerm" placeholder="Search.." name="search">
-            <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
-</nav>
+
+</div>
 
 <script>
     function myFunction() {
