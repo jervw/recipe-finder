@@ -4,15 +4,35 @@
     <meta charset="UTF-8">
     <title>Ajax-tehtävä</title>
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
+<div class="topnav" id="myTopnav">
+    <a class="logo">A-ryhmä</a>
+    <a class="active" href="ajax.html">Recipes</a>
+    <a href="#restaurants">Restaurants</a>
+    <input type="text" placeholder="Reseptihaku">
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+</div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
+
 <header>
-    <h2>TV-sarjojen haku</h2>
+    <h2>Reseptihaku</h2>
 </header>
 
 <section id="haku">
-    <input id="hakuteksti" type="text" name="haku" placeholder="Syötä tähän TV-sarjan nimi">
+    <input id="hakuteksti" type="text" name="haku" placeholder="Reseptihaku">
     <button id="hakunappi">Hae</button>
 </section>
 

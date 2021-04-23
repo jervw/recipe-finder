@@ -38,6 +38,10 @@ body
 {
     margin:0;
     background-color: gray;
+    background-image: url("../img/mansikat.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: top;
 }
 
 .picFormat {
@@ -57,4 +61,75 @@ body
     text-align: center;
     font-weight: bold;
 }
+
+
+/* Top Nav: */
+
+.topnav {
+    overflow: hidden;
+    background-color: rgba(34, 34, 34, 0.87);
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: "Garamond", serif;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #a13737;
+    color: white;
+}
+
+.topnav .icon {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .topnav a, .topnav input[type=text]:not(:first-child) {display: none;}
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .topnav.responsive, .topnav input[type=text] {position: relative;}
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+.topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+}
+
+/* Style the search box inside the navigation bar */
+.topnav input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}
+
+.topnav input[type=text] {
+    border: 1px solid #ccc;
+}
+/* Top Nav end*/
 
