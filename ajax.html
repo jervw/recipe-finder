@@ -14,10 +14,10 @@
     <a href="#restaurants">Restaurants</a>
 
     <div class="search-container">
-        <form action="/action_page.php">
+
             <input type="text" class="searchTerm" placeholder="Search.." name="search">
-            <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
-        </form>
+            <button type="submit" class="searchButton" id="hakunappi2"><i class="fa fa-search"></i></button>
+
     </div>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
 </nav>
@@ -37,10 +37,17 @@
     <h2>Reseptihaku</h2>
 </header>
 
-<section id="haku">
-    <input id="hakuteksti" type="text" name="haku" placeholder="Reseptihaku">
-    <button id="hakunappi">Hae</button>
-</section>
+<!--<section id="haku" class="main-search-container">
+    <input id="hakuteksti" type="text" name="haku" class="main-searchTerm"  placeholder="Reseptihaku">
+    <button id="hakunappi" class="main-searchButton">Hae</button>
+</section>-->
+
+<div class="main-search-container">
+
+        <input type="text" class="main-searchTerm" placeholder="Search.." name="search" id="hakuteksti">
+        <button type="submit" class="main-searchButton" id="hakunappi"><i class="fa fa-search"></i></button>
+
+</div>
 
 <main>
 
