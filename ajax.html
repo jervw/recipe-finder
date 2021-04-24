@@ -5,22 +5,63 @@
     <title>Ajax-tehtävä</title>
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 </head>
 <body>
 
-<nav class="topnav" id="myTopnav">
+<nav class="container2">
+    <input type="checkbox" id="click">
 
-    <a class="active" href="ajax.html">Recipes</a>
-    <a href="#restaurants">Restaurants</a>
+    <ul>
+        <li><a class="active" href="#">Reseptit</a></li>
+        <li><a href="#">Ravintolat</a></li>
+    </ul>
 
-    <div class="search-container">
+    <div></div>
 
+    <div class="logo">A-TEAM</div>
+
+    <label for="click" class="menu-btn">
+        <i class="fas fa-bars"></i>
+    </label>
+
+    <div style="float:right" class="search-container">
+        <input type="text" class="searchTerm" placeholder="Search.." name="search">
+        <button type="submit" class="searchButton" id="hakunappi2"><i class="fa fa-search"></i></button>
+    </div>
+</nav>
+
+<!--
+<div class="container">
+
+    <div class="logo">A-TEAM</div>
+    <nav class="topnav" id="myTopnav">
+        <a class="active" href="ajax.html">Recipes</a>
+        <a href="#restaurants">Restaurants</a>
+
+        <div class="search-container">
             <input type="text" class="searchTerm" placeholder="Search.." name="search">
             <button type="submit" class="searchButton" id="hakunappi2"><i class="fa fa-search"></i></button>
+        </div>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+    </nav>
 
-    </div>
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
-</nav>
+</div>
+-->
+
+<!--
+    <nav class="topnav" id="myTopnav">
+        <a class="active" href="ajax.html">Recipes</a>
+        <a href="#restaurants">Restaurants</a>
+
+        <div class="search-container">
+            <input type="text" class="searchTerm" placeholder="Search.." name="search">
+            <button type="submit" class="searchButton" id="hakunappi2"><i class="fa fa-search"></i></button>
+        </div>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+    </nav>
+-->
+
 
 <script>
     function myFunction() {
@@ -33,9 +74,12 @@
     }
 </script>
 
-<header>
+<!--Kuvat ja videot tässä-->
+<div class="header"></div>
+
+<!--<header>
     <h2>Reseptihaku</h2>
-</header>
+</header>-->
 
 <!--<section id="haku" class="main-search-container">
     <input id="hakuteksti" type="text" name="haku" class="main-searchTerm"  placeholder="Reseptihaku">
@@ -43,10 +87,8 @@
 </section>-->
 
 <div class="main-search-container">
-
-        <input type="text" class="main-searchTerm" placeholder="Search.." name="search" id="hakuteksti">
-        <button type="submit" class="main-searchButton" id="hakunappi"><i class="fa fa-search"></i></button>
-
+    <input type="text" class="main-searchTerm" placeholder="Search.." name="search" id="hakuteksti">
+    <button type="submit" class="main-searchButton" id="hakunappi"><i class="fa fa-search"></i></button>
 </div>
 
 <main>
