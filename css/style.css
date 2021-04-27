@@ -51,7 +51,6 @@ body
     background-size: cover;
 }
 
-
 .picFormat {
     margin:5px;
     border: 2px solid #ccc;
@@ -91,6 +90,42 @@ body
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+    }
+
+    .results {
+        padding-top: 80px;
+        width: 100%;
+        /*margin: 0px;*/
+        display: grid;
+        grid-template-columns: auto;
+        justify-content: center;
+    }
+
+    .results {
+        grid-template-columns: auto auto;
+    }
+
+    .results img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media screen and (min-width: 921px) {
+    .results {
+        grid-template-columns: auto auto auto;
+    }
+}
+
+@media screen and (min-width: 1382px) {
+    .results {
+        grid-template-columns: auto auto auto auto;
+    }
+}
+
+@media screen and (max-width: 630px) {
+    .results {
+        grid-template-columns: auto;
     }
 }
 
@@ -255,6 +290,7 @@ input[type="checkbox"]{
     nav .menu-btn i{
         display: block;
     }
+
     #click:checked ~ .menu-btn i:before{
         content: "\f00d";
     }
@@ -300,5 +336,32 @@ input[type="checkbox"]{
     width: 100%;
 }
 
+.results {
+    padding-top: 80px;
+    width: 100%;
 
+    display: grid;
+    justify-content: center;
+}
 
+.results .item {
+    /*padding: 20px;*/
+    margin: 18px;
+}
+
+.results img {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+
+}
+
+.results img:hover {
+    transform: scale(1.05);
+    transition: all 0.4s ease;
+}
+
+.results p {
+    font-size: 18px;
+    font-weight: normal;
+}

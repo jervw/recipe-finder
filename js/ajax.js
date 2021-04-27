@@ -1,4 +1,49 @@
-const apiurl = "http://api.tvmaze.com/search/shows?q=";
+let myHeaders = new Headers();
+myHeaders.append("Cookie", "__cfduid=d49b963c9b1790102868fa8a468e6f9571619076712");
+
+let requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+};
+
+const apiKey = "0b02b34a3d03459684b2e75f78070faf";
+const inputField = document.getElementById("inputField");
+const submit = document.getElementById("submit");
+const resultsContainer = document.getElementById("results");
+
+const numberOfResults = 9;
+
+function submitField(evt) {
+    resultsContainer.innerHTML = "";
+    search(inputField.value);
+}
+
+function search(query) {
+    fetch("https://api.spoonacular.com/recipes/complexSearch?query=" + query + "&number=" + numberOfResults + "&apiKey=" + apiKey, requestOptions)
+        .then(response => response.json())
+        .then(result => naytaTulokset(result))
+        .catch(error => console.log('error', error));
+
+}
+
+function naytaTulokset(result) {
+
+    console.log(result.totalResults);
+
+    for (let i = 0; i < numberOfResults; i++) {
+        resultsContainer.innerHTML +=
+            `<div class="item">
+            <img src="` + result.results[i].image + `" alt="` + result.results[i].title + `">
+            <p>` + result.results[i].title + `</p>
+            <br>
+          </div>`;
+    }
+}
+
+submit.addEventListener("click", submitField);
+
+/*const apiurl = "http://api.tvmaze.com/search/shows?q=";
 
 let apiKysely;
 
@@ -79,7 +124,7 @@ function naytaVastaus(jsonData) {
             
         </article>`;
     }
-}
+}*/
 
 
 

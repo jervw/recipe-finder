@@ -27,34 +27,38 @@
     </label>
 
     <div style="float:right" class="search-container">
-        <input type="text" class="searchTerm" placeholder="Search.." name="search">
-        <button type="submit" class="searchButton" id="hakunappi2"><i class="fa fa-search"></i></button>
+        <input type="text" class="searchTerm" placeholder="Search.." name="search" id="inputField2">
+        <button type="submit" class="searchButton" id="submit2"><i class="fa fa-search"></i></button>
     </div>
 </nav>
 
 <script>
+    var currentImage = 0;
 
     function changeBackground() {
         console.log("change background");
+
         const images = [
             'url("img/mansikat.png")',
             'url("img/pitaleipa.png")',
         ]
-        const div = document.getElementById("header");
-        const bg = images[Math.floor(Math.random() * images.length)];
-        div.style.backgroundImage = bg;
-    }
-    setInterval(changeBackground, 2000);
+        const headerDiv = document.getElementById("header");
 
+        bg = images[currentImage = ++currentImage % images.length];
+        headerDiv.style.backgroundImage = bg;
+    }
+    setInterval(changeBackground, 10000);
 </script>
 
 <!--Tähän tulee headerin kuvat ja videot-->
 <div class="header" id="header"></div>
 
 <div class="main-search-container">
-    <input type="text" class="main-searchTerm" placeholder="Search.." name="search" id="hakuteksti">
-    <button type="submit" class="main-searchButton" id="hakunappi"><i class="fa fa-search"></i></button>
+    <input type="text" class="main-searchTerm" placeholder="Search.." name="search" id="inputField">
+    <button type="submit" class="main-searchButton" id="submit"><i class="fa fa-search"></i></button>
 </div>
+
+<div class="results" id="results"></div>
 
 <main>
 
