@@ -33,18 +33,23 @@
 </nav>
 
 <script>
-    function myFunction() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-        } else {
-            x.className = "topnav";
-        }
+
+    function changeBackground() {
+        console.log("change background");
+        const images = [
+            'url("img/mansikat.png")',
+            'url("img/pitaleipa.png")',
+        ]
+        const div = document.getElementById("header");
+        const bg = images[Math.floor(Math.random() * images.length)];
+        div.style.backgroundImage = bg;
     }
+    setInterval(changeBackground, 2000);
+
 </script>
 
-<!--Headerin kuvat ja videot tässä-->
-<div class="header"></div>
+<!--Tähän tulee headerin kuvat ja videot-->
+<div class="header" id="header"></div>
 
 <div class="main-search-container">
     <input type="text" class="main-searchTerm" placeholder="Search.." name="search" id="hakuteksti">
