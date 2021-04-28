@@ -8,6 +8,9 @@ let requestOptions = {
 };
 
 const apiKey = "0b02b34a3d03459684b2e75f78070faf";
+const apiKey2 = "79edc81463084c748c02be93655d351f";
+const apiKey3 = "b126b486227f44c68a49b6779d33f513";
+const apiKey4 = "dcb55105e1cb45c9a317c95ee1ba12ab";
 const inputField = document.getElementById("inputField");
 const submit = document.getElementById("submit");
 const resultsContainer = document.getElementById("results");
