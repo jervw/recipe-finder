@@ -7,7 +7,7 @@ let requestOptions = {
     redirect: 'follow'
 };
 
-const apiKey = "0b02b34a3d03459684b2e75f78070faf";
+const apiKey = "79edc81463084c748c02be93655d351f";
 const inputField = document.getElementById("inputField");
 const submit = document.getElementById("submit");
 const resultsContainer = document.getElementById("results");
@@ -34,7 +34,8 @@ function naytaTulokset(result) {
     for (let i = 0; i < numberOfResults; i++) {
         resultsContainer.innerHTML +=
             `<div class="item">
-            <img src="` + result.results[i].image + `" alt="` + result.results[i].title + `">
+            <div class="image-box"><img src="` + result.results[i].image + `" alt="` + result.results[i].title + `"></div>
+            <br>
             <p>` + result.results[i].title + `</p>
             <br>
           </div>`;
@@ -42,6 +43,18 @@ function naytaTulokset(result) {
 }
 
 submit.addEventListener("click", submitField);
+
+
+//test
+/*const recipeContainer = document.getElementById("recipe-container");
+
+function naytaReseptinTiedot(result) {
+    // test
+    recipeContainer.innerHTML +=
+        `
+            <h1 class="title">` + result.results[1003464].title + `</h1>
+        `
+}*/
 
 /*const apiurl = "http://api.tvmaze.com/search/shows?q=";
 
