@@ -45,9 +45,7 @@ header {
 
 .results {
   padding-top: 30px 10px 20px 10px;
-  width: 50%;
-  margin: auto;
-  display: block;
+  display: flex;
 }
 
 .results .item {

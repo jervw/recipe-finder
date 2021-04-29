@@ -14,7 +14,6 @@
     <h1>Food finder</h1>
     <form class="search">
       <input id="inputField" type="text" placeholder="Food name" />
-      <button id="submit" type="button">Search</button>
     </form>
   </header>
 
@@ -38,23 +37,16 @@
 
     const numberOfResults = 3;
 
-    function submitField(evt) {
-      resultsContainer.innerHTML = "";
-      search(inputField.value);
-    }
-
     function search(query) {
       fetch("https://api.spoonacular.com/recipes/complexSearch?query=" + query + "&number=" + numberOfResults + "&apiKey=" + apiKey, requestOptions)
         .then(response => response.json())
-        .then(result => naytaTulokset(result))
+        .then(result => showResults(result))
         .catch(error => console.log('error', error));
 
     }
 
-    function naytaTulokset(result) {
-
-      console.log(result.totalResults);
-
+    function showResults(result) {
+      flushResults();
       for (let i = 0; i < numberOfResults; i++) {
         resultsContainer.innerHTML +=
           `<div class="item">
@@ -64,7 +56,17 @@
       }
     }
 
-    submit.addEventListener("click", submitField);
+    function flushResults() {
+      resultsContainer.innerHTML = "";
+    }
+
+    inputField.addEventListener("keyup", e => {
+      if (inputField.value != "") {
+        search(inputField.value);
+      } else {
+        flushResults();
+      }
+    })
   </script>
 </body>
 
