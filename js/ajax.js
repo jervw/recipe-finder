@@ -37,7 +37,6 @@ function searchRecipe(query) {
 
 function showResults(result) {
 
-    // TODO change from innerHTML to DOM
     for (let i = 0; i < numberOfResults; i++) {
         resultsContainer.innerHTML +=
             `<div class="item" id="` + result.results[i].id + `" onClick="onRecipeItemClick(this.id)">
@@ -61,34 +60,54 @@ function onRecipeItemClick(id) {
 
 function showRecipe(recipe) {
 
-    // TODO, muuta DOM? 
     // TODO, jos kuvaa ei löydy niin näytä placeholder
 
 
-
-
     recipeContainer.innerHTML = `
-    <div class="recipe">
-    <div class="col-1">
+    <style>
+        .header {
+            display: none;
+        }
+        .container2 {
+            position: relative;
+            width: 100%;
+        }
+    </style>
+    <div class="recipe-container">
+    <div class="col-1-1">
         <h1 class="title">` + recipe.title + `</h1>
-        <p class="readyInMinutes">` + recipe.readyInMinutes + ` minutes</p>
-        <p class="servings">` + recipe.servings + ` servings</p>
+        
+        <div class="time-serv-container">
+            <div class="clock-container">
+                <img class="clock-icon" src="img/time-1.png">
+                <p class="readyInMinutes"> ` + recipe.readyInMinutes + ` MIN</p>
+            </div>
+            <div class="serv-container">
+                <img class="clock-icon" src="img/serv-1.png">
+                <p class="servings"> ` + recipe.servings + ` SERVES</p>
+            </div>
+        </div>
+        
     </div>
-d
-    <div class="col-2">
+    <div class="col-2-1">
         <img class="image" src="` + recipe.image + `">
     </div>
-
-    <div class="col-1">
-        <h2 class="ingredients-steps-title">Ingredients</h2>
-        `+ getIngredients(recipe) + `
+    <div class="col-1-2">
+        <div class="ingredients-card">
+            <img class="ohje-icon" src="img/ingr.png">
+            <h2 class="ingredients-steps-title">Ingredients</h2>
+            `+ getIngredients(recipe) + `
+        </div>
     </div>
-
-    <div class="col-2">
-        <h2 id="steps" class="ingredients-steps-title">Steps</h2>
-        <ol>
-        `+ getInstructions(recipe) + `
-        </ol>
+    <div class="col-2-2" >
+        <div class="steps-card">
+             <img class="ohje-icon" src="img/ohje.png">
+             <h2 id="steps" class="ingredients-steps-title">Directions</h2>
+            <ol>
+            `+ getInstructions(recipe) + `
+            </ol>
+        </div>
+    </div>
     </div>
     `;
 }
@@ -102,7 +121,9 @@ function unitConversion(ingredient) {
         let ingredientAmount;
 
         if (ingredient.measures["metric"].amount >= 100) {
-            ingredientAmount = Math.round((ingredient.measures["metric"].amount / 100) * 4) / 4;
+            ingredientAmount = Math.round(ingredient.measures["metric"].amount * 4) / 4;
+            ingredientAmount = Math.ceil(ingredientAmount / 10) * 10;
+            console.log(ingredientAmount);
         } else {
             ingredientAmount = ingredient.measures["metric"].amount;
         }
