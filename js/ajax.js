@@ -74,18 +74,18 @@ function showRecipe(recipe) {
         <p class="readyInMinutes">` + recipe.readyInMinutes + ` minutes</p>
         <p class="servings">` + recipe.servings + ` servings</p>
     </div>
-
+d
     <div class="col-2">
         <img class="image" src="` + recipe.image + `">
     </div>
 
     <div class="col-1">
-        <h2 class="ingredients-steps-title">Ainekset</h2>
+        <h2 class="ingredients-steps-title">Ingredients</h2>
         `+ getIngredients(recipe) + `
     </div>
 
     <div class="col-2">
-        <h2 id="steps" class="ingredients-steps-title">Ohje</h2>
+        <h2 id="steps" class="ingredients-steps-title">Steps</h2>
         <ol>
         `+ getInstructions(recipe) + `
         </ol>
@@ -93,10 +93,30 @@ function showRecipe(recipe) {
     `;
 }
 
+function unitConversion(ingredient) {
+
+    // TODO make toggle switch to toggle this value
+    let conversionEnabled = true;
+
+    if (conversionEnabled) {
+        let ingredientAmount;
+
+        if (ingredient.measures["metric"].amount >= 100) {
+            ingredientAmount = Math.round((ingredient.measures["metric"].amount / 100) * 4) / 4;
+        } else {
+            ingredientAmount = ingredient.measures["metric"].amount;
+        }
+
+        return ingredientAmount + " " + ingredient.measures["metric"].unitShort + " " + ingredient.name;
+    }
+
+    return ingredient.originalString;
+}
+
 function getIngredients(recipe) {
     html = "";
     for (let i = 0; i < recipe.extendedIngredients.length; i++) {
-        html += `<p>` + recipe.extendedIngredients[i].name + `</p>`;
+        html += `<p>` + unitConversion(recipe.extendedIngredients[i]) + `</p>`;
     }
     return html;
 }
