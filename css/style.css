@@ -69,6 +69,26 @@ body
     font-weight: bold;
 }
 
+#mapcontainer {
+    height: 80%;
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    position:fixed;
+    text-align:center
+}
+
+#map {
+    height: 50%;
+    width: 92%;
+    align-content: center;
+    border-radius: 5px 5px 5px 5px;
+    margin: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
 /* If screen width is <= 920px: */
 @media screen and (max-width: 920px) {
 

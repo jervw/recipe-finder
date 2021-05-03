@@ -17,13 +17,14 @@ const resultsContainer = document.getElementById("results");
 
 const numberOfResults = 9;
 
+
 function submitField(evt) {
     resultsContainer.innerHTML = "";
     search(inputField.value);
 }
 
 function search(query) {
-    fetch("https://api.spoonacular.com/recipes/complexSearch?query=" + query + "&number=" + numberOfResults + "&apiKey=" + apiKey, requestOptions)
+    fetch("https://api.spoonacular.com/recipes/complexSearch?query=" + query + "&number=" + numberOfResults + "&apiKey=" + apiKey2, requestOptions)
         .then(response => response.json())
         .then(result => naytaTulokset(result))
         .catch(error => console.log('error', error));
@@ -43,9 +44,34 @@ function naytaTulokset(result) {
           </div>`;
     }
 }
+//Places related code
+
+let map;
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+    });
+}
 
 submit.addEventListener("click", submitField);
 
+document.getElementById("inputField")
+.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("submit").click();
+    }
+});
+
+document.getElementById("inputField2")
+.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("submit2").click();
+    }
+});
 /*const apiurl = "http://api.tvmaze.com/search/shows?q=";
 
 let apiKysely;
