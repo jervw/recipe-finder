@@ -26,7 +26,6 @@ const numberOfResults = 9;
 function submitField(evt) {
     resultsContainer.innerHTML = "";
     searchRecipe(inputField.value);
-    searchRecipe(inputField2.value);
 }
 
 function submitField2(evt) {
@@ -121,10 +120,31 @@ function showRecipe(recipe) {
     `;
 }
 
+function unitConversion(ingredient) {
+
+    // TODO make toggle switch to toggle this value
+    let conversionEnabled = true;
+
+    if (conversionEnabled) {
+        let ingredientAmount;
+
+        if (ingredient.measures["metric"].amount >= 100) {
+            ingredientAmount = Math.round((ingredient.measures["metric"].amount / 100) * 4) / 4;
+        } else {
+            ingredientAmount = ingredient.measures["metric"].amount;
+        }
+
+        //return ingredientAmount + " " + ingredient.measures["metric"].unitShort + " " + ingredient.name;
+        return ingredientAmount + " " + ingredient.measures["metric"].unitShort + " " + `<p class='ingr-name'>` + ingredient.name + `</p>`;
+    }
+
+    return ingredient.originalString;
+}
+
 function getIngredients(recipe) {
     html = "";
     for (let i = 0; i < recipe.extendedIngredients.length; i++) {
-        html += `<p>` + recipe.extendedIngredients[i].name + `</p>`;
+        html += `<div class="unit-name-container"> <p class='ingr-unit'>` + unitConversion(recipe.extendedIngredients[i]) + `</p> </div>`;
     }
     return html;
 }
