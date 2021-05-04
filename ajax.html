@@ -16,12 +16,13 @@
 
 <body>
 
-    <nav class="topnav">
+    <!--Top nav-->
+    <nav class="container2">
         <input type="checkbox" id="click">
 
         <ul>
-            <li><a class="active" href="#">Recipes</a></li>
-            <li><a href="#">Ravintolat</a></li>
+            <li><a class="active" href="ajax.html">RESEPTIT</a></li>
+            <li><a href="restaurant.html">RAVINTOLAT</a></li>
         </ul>
 
         <div></div>
@@ -32,6 +33,7 @@
             <i class="fas fa-bars"></i>
         </label>
 
+        <!--Search in top nav-->
         <div style="float:right" class="search-container">
             <input type="text" class="searchTerm" placeholder="Search.." name="search" id="inputField2">
             <button type="submit" class="searchButton" id="submit2"><i class="fa fa-search"></i></button>
@@ -39,6 +41,7 @@
     </nav>
 
     <script>
+        /* Changing background images of header */
         var currentImage = 0;
 
         function changeBackground() {
@@ -59,13 +62,21 @@
     <!--Tähän tulee headerin kuvat ja videot-->
     <div class="header" id="header"></div>
 
+    <!--Main search-->
     <div class="main-search-container">
         <input type="text" class="main-searchTerm" placeholder="Search.." name="search" id="inputField">
         <button type="submit" class="main-searchButton" id="submit"><i class="fa fa-search"></i></button>
     </div>
 
-    <div class="results"></div>
+    <!--Tähän tulee hakutulokset-->
+    <div class="results" id="results"></div>
+
+    <!--Tähän tulee reseptien tiedot-->
     <div class="recipe"></div>
+    <br>
+    <br>
+
+    <footer></footer>
 
     <main>
 

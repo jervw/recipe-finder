@@ -24,7 +24,6 @@ const numberOfResults = 9;
 function submitField(evt) {
     resultsContainer.innerHTML = "";
     searchRecipe(inputField.value);
-
 }
 
 function searchRecipe(query) {
@@ -121,14 +120,13 @@ function unitConversion(ingredient) {
         let ingredientAmount;
 
         if (ingredient.measures["metric"].amount >= 100) {
-            ingredientAmount = Math.round(ingredient.measures["metric"].amount * 4) / 4;
-            ingredientAmount = Math.ceil(ingredientAmount / 10) * 10;
-            console.log(ingredientAmount);
+            ingredientAmount = Math.round((ingredient.measures["metric"].amount / 100) * 4) / 4;
         } else {
             ingredientAmount = ingredient.measures["metric"].amount;
         }
 
-        return ingredientAmount + " " + ingredient.measures["metric"].unitShort + " " + ingredient.name;
+        //return ingredientAmount + " " + ingredient.measures["metric"].unitShort + " " + ingredient.name;
+        return ingredientAmount + " " + ingredient.measures["metric"].unitShort + " " + `<p class='ingr-name'>` + ingredient.name + `</p>`;
     }
 
     return ingredient.originalString;
@@ -137,7 +135,7 @@ function unitConversion(ingredient) {
 function getIngredients(recipe) {
     html = "";
     for (let i = 0; i < recipe.extendedIngredients.length; i++) {
-        html += `<p>` + unitConversion(recipe.extendedIngredients[i]) + `</p>`;
+        html += `<div class="unit-name-container"> <p class='ingr-unit'>` + unitConversion(recipe.extendedIngredients[i]) + `</p> </div>`;
     }
     return html;
 }
