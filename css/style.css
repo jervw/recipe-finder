@@ -428,7 +428,7 @@ input[type="checkbox"]{
 
 
 
-/* resepti sivu: */
+/* reseptisivu: */
 [class*="col-"] {
     float: left;
 }
@@ -460,6 +460,8 @@ input[type="checkbox"]{
     margin: 0 auto;
     max-width: 1200px;
     padding: 130px 30px 30px;
+    /*border: 5px solid red;*/
+    height: 1100px;
 }
 
 .title {
@@ -531,8 +533,19 @@ ol li {
     padding-top: 6px;
 }
 
-/*map: */
+.ingr-unit {
+    text-align: right;
+    max-width: 90px;
+    float:left;
+    font-weight: bold;
+}
 
+.ingr-name {
+    max-width: 200px;
+    padding-left: 80px;
+}
+
+/* map: */
 #mapcontainer {
     height: 80%;
     width: 100%;
@@ -551,18 +564,19 @@ ol li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.ingr-unit {
-    text-align: right;
-    max-width: 90px;
-    float:left;
-    font-weight: bold;
+.container-for-map {
+    height: 500px
 }
+/*map end*/
 
-.ingr-name {
-    max-width: 200px;
-    padding-left: 80px;
-}
 
-.unit-name-container {
 
+
+
+footer {
+    text-align: center;
+    padding: 3px;
+    /*background-color: #ff5f5f;*/
+    color: white;
+    height: 90px;
 }
