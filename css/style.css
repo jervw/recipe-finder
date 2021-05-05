@@ -599,7 +599,7 @@ ol li {
     padding-top: 2px;
 }
 
-p {
+.rating {
     font-family: 'Questrial', sans-serif;
     float: none;
     font-size: 18px;

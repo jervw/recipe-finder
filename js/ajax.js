@@ -167,7 +167,7 @@ function showRecipe(recipe) {
           </div>
           <div class="serv-container">
              <img class="clock-icon" src="img/serv-1.png">
-             <p class="servings">${recipe.servings} SERVES</p>
+             <p class="servings">${recipe.servings} SERVINGS</p>
           </div>
        </div>
     </div>

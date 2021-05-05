@@ -146,8 +146,8 @@ function displayRestaurants() {
         <article class="ravintolat-item">
            
             <h4 class="ravintolan-nimi">${resultsArray[i].name}</h4>
-            <p class="address">${resultsArray[i].vicinity}</p>
-            <p>Rating: ${resultsArray[i].rating}</p>
+            <p class="rating">${resultsArray[i].vicinity}</p>
+            <p class="rating">Rating: ${resultsArray[i].rating}</p>
         </article>`;
     }
 }
