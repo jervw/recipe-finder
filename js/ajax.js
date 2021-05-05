@@ -16,7 +16,7 @@ const apiKey = [
     "dcb55105e1cb45c9a317c95ee1ba12ab"];
 
 // Index of selected API key
-var currentApi = 1;
+var currentApi = 0;
 var conversionEnabled = 0;
 var lastRecipe;
 
@@ -35,10 +35,12 @@ const itemContainer = document.querySelector(".item");
 form.addEventListener('submit', submitForm);
 formNav.addEventListener('submit', submitForm);
 
+// Display random recipes
+//randomRecipes();
 
 // OnClick() function for a search field.
 function submitForm(evt) {
-    resultsContainer.innerHTML = "";
+
     let fieldValue;
     switch (evt.target.id) {
         case "form-main":
@@ -64,6 +66,27 @@ function onToggleClick(evt) {
     document.querySelector(".ingredients-list").innerHTML = getIngredients(lastRecipe);
 }
 
+// Using Spoonacular API to display random recipes. 
+function randomRecipes() {
+    fetch(`https://api.spoonacular.com/recipes/random?number=${numberOfResults}&apiKey=${apiKey[currentApi]}`, requestOptions)
+        .then(response => response.json())
+        .then(result => showRandomRecipes(result))
+        .catch(error => console.log('error', error));
+}
+
+function showRandomRecipes(result) {
+    resultsContainer.innerHTML = "";
+    // Loops through search results and arranges recipe data to results container.
+    for (let i = 0; i < numberOfResults; i++) {
+        resultsContainer.innerHTML +=
+            `<div class="item" id="${result.recipes[i].title}" onClick="onRecipeItemClick(this.id)">
+                <img class="image-box" width="312" height="231" src="${result.recipes[i].image}" alt="${result.recipes[i].title}">
+                <p>${result.recipes[i].title}</p><br>
+            </div>`;
+    }
+}
+
+
 // Searches Spoonacular API with given search query. 
 function searchRecipe(query) {
     fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=${numberOfResults}&apiKey=${apiKey[currentApi]}`, requestOptions)
@@ -73,12 +96,12 @@ function searchRecipe(query) {
 }
 
 function showResults(result) {
-
+    resultsContainer.innerHTML = "";
     // Loops through search results and arranges recipe data to results container.
     for (let i = 0; i < numberOfResults; i++) {
         resultsContainer.innerHTML +=
             `<div class="item" id="${result.results[i].id}" onClick="onRecipeItemClick(this.id)">
-                <img src="${result.results[i].image}" alt="${result.results[i].title}">
+                <img class="image-box" src="${result.results[i].image}" alt="${result.results[i].title}">
                 <p>${result.results[i].title}</p><br>
             </div>`;
     }
@@ -113,8 +136,6 @@ function unitConversion(ingredient) {
 }
 
 
-
-
 // Loops through recipe ingredients and returns HTML with an list of ingredients.
 function getIngredients(recipe) {
     lastRecipe = recipe;
@@ -137,6 +158,7 @@ function getInstructions(recipe) {
 // Arranges recipe data to recipe container using innerHTML.
 function showRecipe(recipe) {
     recipeContainer.innerHTML = `
+    <div class="back-button"><a href="ajax.html"><img src="img/nuoli-icon.png"></a></div>
     <div class="recipe-container">
     <div class="col-1-1">
        <h1 class="title">${recipe.title}</h1>
