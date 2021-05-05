@@ -81,7 +81,7 @@ function showRandomRecipes(result) {
     for (let i = 0; i < numberOfResults; i++) {
         resultsContainer.innerHTML +=
             `<div class="item" id="${result.recipes[i].id}" onClick="onRecipeItemClick(this.id)">
-                <img class="image-box" width="312" height="231" src="${result.recipes[i].image}" alt="${result.recipes[i].title}">
+                <div class="image-box"><img width="312" height="231" src="${result.recipes[i].image}" alt="${result.recipes[i].title}"></div>
                 <p>${result.recipes[i].title}</p><br>
             </div>`;
     }
@@ -99,11 +99,9 @@ function showResults(result) {
     for (let i = 0; i < numberOfResults; i++) {
         // Loops through search results and arranges recipe data to results container.
         resultsContainer.innerHTML +=
-            `<div class="item" id="` + result.results[i].id + `" onClick="onRecipeItemClick(this.id)">
-                <div class="image-box"><img src="` + result.results[i].image + `" alt="` + result.results[i].title + `"></div>
-                <br>
-                <p>` + result.results[i].title + `</p>
-                <br>
+            `<div class="item" id="${result.results[i].id}" onClick="onRecipeItemClick(this.id)">
+                <div class="image-box"><img src="${result.results[i].image}" alt="${result.results[i].title}"></div>
+                <p>${result.results[i].title}</p><br>
             </div>`;
     }
 }
