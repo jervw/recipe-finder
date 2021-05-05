@@ -106,6 +106,16 @@ function showResults(result) {
             </div>`;
     }
 }
+//Places related code
+
+let map;
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+    });
+}
 
 //OnClick() function for each recipe element. It has an ID parameter to know which element was clicked.
 function onRecipeItemClick(id) {
