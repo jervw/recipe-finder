@@ -89,7 +89,8 @@ function showRandomRecipes(result) {
 
 // Searches Spoonacular API with given search query. 
 function searchRecipe(query) {
-    fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=${numberOfResults}&apiKey=${apiKey[currentApi]}`, requestOptions)
+    fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}
+    &number=${numberOfResults}&apiKey=${apiKey[currentApi]}`, requestOptions)
         .then(response => response.json())
         .then(result => showResults(result))
         .catch(error => console.log('error', error));
