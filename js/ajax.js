@@ -79,7 +79,7 @@ function showRandomRecipes(result) {
     // Loops through search results and arranges recipe data to results container.
     for (let i = 0; i < numberOfResults; i++) {
         resultsContainer.innerHTML +=
-            `<div class="item" id="${result.recipes[i].title}" onClick="onRecipeItemClick(this.id)">
+            `<div class="item" id="${result.recipes[i].id}" onClick="onRecipeItemClick(this.id)">
                 <img class="image-box" width="312" height="231" src="${result.recipes[i].image}" alt="${result.recipes[i].title}">
                 <p>${result.recipes[i].title}</p><br>
             </div>`;
