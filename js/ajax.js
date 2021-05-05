@@ -1,3 +1,4 @@
+// Header and cookie options for Fetch() requests.
 const myHeaders = new Headers();
 myHeaders.append("Cookie", "__cfduid=d49b963c9b1790102868fa8a468e6f9571619076712");
 
@@ -7,34 +8,85 @@ const requestOptions = {
     redirect: 'follow'
 };
 
-const apiKey = "79edc81463084c748c02be93655d351f";
-const apiKey2 = "79edc81463084c748c02be93655d351f";
-const apiKey3 = "b126b486227f44c68a49b6779d33f513";
-const apiKey4 = "dcb55105e1cb45c9a317c95ee1ba12ab";
+// Array of Spoonacular API keys
+const apiKey = [
+    "dcb55105e1cb45c9a317c95ee1ba12ab",
+    "0b02b34a3d03459684b2e75f78070faf",
+    "79edc81463084c748c02be93655d351f",
+    "b126b486227f44c68a49b6779d33f513",
+    "dcb55105e1cb45c9a317c95ee1ba12ab"];
 
+// Index of selected API key
+var currentApi = 1;
+var conversionEnabled = 0;
+var lastRecipe;
+
+// Number of recipes to show on search.
+const numberOfResults = 12;
+
+const form = document.getElementById("form-main");
+const formNav = document.getElementById("form-nav");
 const inputField = document.getElementById("inputField");
-const submit = document.getElementById("submit");
-const inputField2 = document.getElementById("inputField2");
-const submit2 = document.getElementById("submit2");
+const inputFieldNav = document.getElementById("inputField2");
+const submitNav = document.getElementById("submit2");
 const resultsContainer = document.querySelector(".results");
 const recipeContainer = document.querySelector(".recipe");
-
 const itemContainer = document.querySelector(".item");
 
-const numberOfResults = 9;
+form.addEventListener('submit', submitForm);
+formNav.addEventListener('submit', submitForm);
 
-function submitField(evt) {
+// OnClick() function for a search field.
+function submitForm(evt) {
     resultsContainer.innerHTML = "";
-    searchRecipe(inputField.value);
+    let fieldValue;
+    switch (evt.target.id) {
+        case "form-main":
+            fieldValue = inputField.value;
+            break;
+        case "form-nav":
+            fieldValue = inputFieldNav.value;
+            break;
+    }
+    searchRecipe(fieldValue);
 }
 
-function submitField2(evt) {
-    resultsContainer.innerHTML = "";
-    searchRecipe(inputField2.value);
+// OnClick() function for a recipe unit toggle button.
+function onToggleClick(evt) {
+    if (evt.classList.contains('off')) {
+        evt.classList.remove('off');
+        conversionEnabled = false;
+    } else {
+        evt.classList.add('off');
+        conversionEnabled = true;
+    }
+
+    document.querySelector(".ingredients-list").innerHTML = getIngredients(lastRecipe);
 }
 
+// Using Spoonacular API to display random recipes.
+function randomRecipes() {
+    fetch(`https://api.spoonacular.com/recipes/random?number=${numberOfResults}&apiKey=${apiKey[currentApi]}`, requestOptions)
+        .then(response => response.json())
+        .then(result => showRandomRecipes(result))
+        .catch(error => console.log('error', error));
+}
+
+function showRandomRecipes(result) {
+    resultsContainer.innerHTML = "";
+    // Loops through search results and arranges recipe data to results container.
+    for (let i = 0; i < numberOfResults; i++) {
+        resultsContainer.innerHTML +=
+            `<div class="item" id="${result.recipes[i].id}" onClick="onRecipeItemClick(this.id)">
+                <img class="image-box" width="312" height="231" src="${result.recipes[i].image}" alt="${result.recipes[i].title}">
+                <p>${result.recipes[i].title}</p><br>
+            </div>`;
+    }
+}
+
+// Searches Spoonacular API with given search query.
 function searchRecipe(query) {
-    fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=${numberOfResults}&apiKey=${apiKey}`, requestOptions)
+    fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=${numberOfResults}&apiKey=${apiKey[currentApi]}`, requestOptions)
         .then(response => response.json())
         .then(result => showResults(result))
         .catch(error => console.log('error', error));
@@ -42,113 +94,57 @@ function searchRecipe(query) {
 
 function showResults(result) {
 
-    // TODO change from innerHTML to DOM
     for (let i = 0; i < numberOfResults; i++) {
-
+        // Loops through search results and arranges recipe data to results container.
         resultsContainer.innerHTML +=
             `<div class="item" id="` + result.results[i].id + `" onClick="onRecipeItemClick(this.id)">
-            <div class="image-box"><img src="` + result.results[i].image + `" alt="` + result.results[i].title + `"></div>
-            <br>
-            <p>` + result.results[i].title + `</p>
-            <br>
-          </div>`;
+                <div class="image-box"><img src="` + result.results[i].image + `" alt="` + result.results[i].title + `"></div>
+                <br>
+                <p>` + result.results[i].title + `</p>
+                <br>
+            </div>`;
     }
 }
 
-
+//OnClick() function for each recipe element. It has an ID parameter to know which element was clicked.
 function onRecipeItemClick(id) {
+
+    // Hiding recipe results view and showing recipe page.
     resultsContainer.style.display = "none";
     recipeContainer.style.display = "block";
+    document.querySelector(".header").style.display = "none";
+    document.querySelector(".container2").style.position = "relative";
+    document.querySelector(".container2").style.width = "100%";
 
-    fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${apiKey}`, requestOptions)
+    // Searches Spoonacular API for additional recipe information with an unique ID.
+    fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${apiKey[currentApi]}`, requestOptions)
         .then(response => response.json())
         .then(recipe => showRecipe(recipe))
         .catch(error => console.log('error', error));
 }
 
-function showRecipe(recipe) {
-
-    // TODO, muuta DOM?
-    // TODO, jos kuvaa ei löydy niin näytä placeholder
-
-    recipeContainer.innerHTML = `
-    <style>
-        .header {
-            display: none;
-        }
-        .container2 {
-            position: relative;
-            width: 100%;
-        }
-    </style>
-
-    <div class="recipe-container">
-    <div class="col-1-1">
-        <h1 class="title">` + recipe.title + `</h1>
-        
-        <div class="time-serv-container">
-            <div class="clock-container">
-                <img class="clock-icon" src="img/time-1.png">
-                <p class="readyInMinutes"> ` + recipe.readyInMinutes + ` MIN</p>
-            </div>
-            <div class="serv-container">
-                <img class="clock-icon" src="img/serv-1.png">
-                <p class="servings"> ` + recipe.servings + ` SERVES</p>
-            </div>
-        </div>
-        
-    </div>
-    <div class="col-2-1">
-        <img class="image" src="` + recipe.image + `">
-    </div>
-    <div class="col-1-2">
-        <div class="ingredients-card">
-            <img class="ohje-icon" src="img/ingr.png">
-            <h2 class="ingredients-steps-title">Ingredients</h2>
-            `+ getIngredients(recipe) + `
-        </div>
-    </div>
-    <div class="col-2-2" >
-        <div class="steps-card">
-             <img class="ohje-icon" src="img/ohje.png">
-             <h2 id="steps" class="ingredients-steps-title">Directions</h2>
-            <ol>
-            `+ getInstructions(recipe) + `
-            </ol>
-        </div>
-    </div>
-    `;
-}
-
+// Converts ingredient units to desired system and returns formatted ingredient string.
 function unitConversion(ingredient) {
-
-    // TODO make toggle switch to toggle this value
-    let conversionEnabled = true;
-
+    let ingredientAmount = ingredient.measures["us"].amount;
     if (conversionEnabled) {
-        let ingredientAmount;
-
-        if (ingredient.measures["metric"].amount >= 100) {
-            ingredientAmount = Math.round((ingredient.measures["metric"].amount / 100) * 4) / 4;
-        } else {
-            ingredientAmount = ingredient.measures["metric"].amount;
-        }
-
-        //return ingredientAmount + " " + ingredient.measures["metric"].unitShort + " " + ingredient.name;
-        return ingredientAmount + " " + ingredient.measures["metric"].unitShort + " " + `<p class='ingr-name'>` + ingredient.name + `</p>`;
+        ingredientAmount = Math.round(ingredient.measures["metric"].amount);
+        return "<p class='ingr-unit'>" + ingredientAmount + " " + ingredient.measures["metric"].unitShort + " " + `</p><p class='ingr-name'>` + ingredient.name + `</p>`;
     }
 
-    return ingredient.originalString;
+    return "<p class='ingr-unit'>" + ingredientAmount + " " + ingredient.measures["us"].unitShort + " " + `</p><p class='ingr-name'>` + ingredient.name + `</p>`;
 }
 
+// Loops through recipe ingredients and returns HTML with an list of ingredients.
 function getIngredients(recipe) {
+    lastRecipe = recipe;
     html = "";
     for (let i = 0; i < recipe.extendedIngredients.length; i++) {
-        html += `<div class="unit-name-container"> <p class='ingr-unit'>` + unitConversion(recipe.extendedIngredients[i]) + `</p> </div>`;
+        html += `<div class="unit-name-container">` + unitConversion(recipe.extendedIngredients[i]) + `</p> </div>`;
     }
     return html;
 }
 
+// Loops through recipe instructions and returns HTML with an ordered list.
 function getInstructions(recipe) {
     html = "";
     for (let i = 0; i < recipe.analyzedInstructions[0].steps.length; i++) {
@@ -157,180 +153,49 @@ function getInstructions(recipe) {
     return html;
 }
 
-submit.addEventListener("click", submitField);
-submit2.addEventListener("click", submitField2);
-
-document.getElementById("inputField")
-    .addEventListener("keyup", function(event) {
-        event.preventDefault();
-        if (event.keyCode === 13) {
-            document.getElementById("submit").click();
-        }
-    });
-
-document.getElementById("inputField2")
-    .addEventListener("keyup", function(event) {
-        event.preventDefault();
-        if (event.keyCode === 13) {
-            document.getElementById("submit2").click();
-        }
-    });
-
-
-
-
-
-/*let myHeaders = new Headers();
-myHeaders.append("Cookie", "__cfduid=d49b963c9b1790102868fa8a468e6f9571619076712");
-
-let requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-};
-
-const apiKey = "79edc81463084c748c02be93655d351f";
-const inputField = document.getElementById("inputField");
-const submit = document.getElementById("submit");
-const resultsContainer = document.getElementById("results");
-
-const numberOfResults = 9;
-
-function submitField(evt) {
-    resultsContainer.innerHTML = "";
-    search(inputField.value);
+// Arranges recipe data to recipe container using innerHTML.
+function showRecipe(recipe) {
+    recipeContainer.innerHTML = `
+    <div class="back-button"><a href="ajax.html"><img src="img/nuoli-icon.png"></a></div>
+    <div class="recipe-container">
+    <div class="col-1-1">
+       <h1 class="title">${recipe.title}</h1>
+       <div class="time-serv-container">
+          <div class="clock-container">
+             <img class="clock-icon" src="img/time-1.png">
+             <p class="readyInMinutes"> ${recipe.readyInMinutes} MIN</p>
+          </div>
+          <div class="serv-container">
+             <img class="clock-icon" src="img/serv-1.png">
+             <p class="servings">${recipe.servings} SERVES</p>
+          </div>
+       </div>
+    </div>
+    <div class="col-2-1">
+       <img class="image" src="${recipe.image}">
+    </div>
+    <div class="col-1-2">
+       <div class="ingredients-card">
+          <div class="toggleContainer" id="toggleContainer" onclick="onToggleClick(this)">
+             <div class="switch" id="switch">
+             </div>
+             <div class="label left">US</div>
+             <div class="label right">Metric</div>
+          </div>
+          <img class="ohje-icon" src="img/ingr.png">
+          <h2 class="ingredients-steps-title">Ingredients</h2>
+          <div class="ingredients-list">${getIngredients(recipe)}</div>
+       </div>
+    </div>
+    <div class="col-2-2" >
+       <div class="steps-card">
+          <img class="ohje-icon" src="img/ohje.png">
+          <h2 id="steps" class="ingredients-steps-title">Directions</h2>
+          <ol>
+             ${getInstructions(recipe)}
+          </ol>
+       </div>
+    </div>
+ </div>
+    `;
 }
-
-function search(query) {
-    fetch("https://api.spoonacular.com/recipes/complexSearch?query=" + query + "&number=" + numberOfResults + "&apiKey=" + apiKey, requestOptions)
-        .then(response => response.json())
-        .then(result => naytaTulokset(result))
-        .catch(error => console.log('error', error));
-
-}
-
-function naytaTulokset(result) {
-
-    console.log(result.totalResults);
-
-    for (let i = 0; i < numberOfResults; i++) {
-        resultsContainer.innerHTML +=
-            `<div class="item">
-            <div class="image-box"><img src="` + result.results[i].image + `" alt="` + result.results[i].title + `"></div>
-            <br>
-            <p>` + result.results[i].title + `</p>
-            <br>
-          </div>`;
-    }
-}
-
-submit.addEventListener("click", submitField);*/
-
-
-
-
-
-
-
-
-
-
-
-//test
-/*const recipeContainer = document.getElementById("recipe-container");
-
-function naytaReseptinTiedot(result) {
-    // test
-    recipeContainer.innerHTML +=
-        `
-            <h1 class="title">` + result.results[1003464].title + `</h1>
-        `
-}*/
-
-/*const apiurl = "http://api.tvmaze.com/search/shows?q=";
-
-let apiKysely;
-
-
-const hakunappi = document.getElementById("hakunappi");
-if (hakunappi == null) {
-    console.log("Debug: hakunappia ei löytynyt")
-} else {
-    console.log("Debug: hakunappi löytyi!");
-}
-const hakuKentta = document.getElementById("hakuteksti");
-const mainElement = document.querySelector("main");
-
-hakunappi.addEventListener('click', teeKysely);
-
-function teeKysely() {
-    let hakusana = hakuKentta.value;
-
-    apiKysely = apiurl + hakusana;
-    console.log("Lähetettävä kysely: " + apiKysely);
-    teeHaku(apiKysely);
-}
-
-function teeHaku(apiKysely)  {
-
-    fetch(apiKysely).then(function(response) {
-        return response.json();
-    }).then(function(json) {
-        naytaVastaus(json);
-    });
-}
-
-function naytaVastaus(jsonData) {
-
-    let kuvanOsoite, altArvo, kuvaus, genre;
-
-    if (jsonData.length == 0) {
-        mainElement.innerHTML = `<h3>Annetulla haulla ei tuloksia.</h3>`;
-    } else {
-        mainElement.innerHTML = `<h3>Löytyneet hakutulokset:</h3>`;
-    }
-
-    for (let i = 0; i < jsonData.length; i++) {
-
-        if (jsonData[i].show.summary != null) {
-            kuvaus = jsonData[i].show.summary;
-        } else {
-            kuvaus = 'Description not found';
-        }
-
-        if (jsonData[i].show.summary != null) {
-            genre = jsonData[i].show.genres;
-        } else {
-            genre = 'Genre details not found';
-        }
-
-        try {
-            kuvanOsoite = jsonData[i].show.image.medium;
-            altArvo = 'Haettu kuva';
-
-        } catch (error) {
-            kuvanOsoite = 'img/notFound.jpg';
-            altArvo = 'Kuvaa ei löytynyt';
-
-        }
-        mainElement.innerHTML += `
-        <article>
-           
-            <div class="picFormat">
-            <h4>${jsonData[i].show.name}</h4>
-                <img src="${kuvanOsoite}" alt="${altArvo}">
-                <div class="description">${kuvaus}</div>
-                <p>${genre}</p>
-                <div>
-                <a href="${jsonData[i].show.officialSite}"><p>Series Official Site</p></a>
-                </div>
-            </div>
-            
-        </article>`;
-    }
-}*/
-
-
-
-
-
