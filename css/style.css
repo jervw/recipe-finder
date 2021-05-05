@@ -418,6 +418,9 @@ input[type="checkbox"]{
     overflow: hidden;
 }
 
+
+
+
 .image-box:hover img {
     transform: scale(1.1);
 }
@@ -533,16 +536,19 @@ ol li {
     padding-top: 6px;
 }
 
+.unit-name-container{
+    text-align: center;
+}
+
 .ingr-unit {
     text-align: right;
-    max-width: 90px;
     float:left;
     font-weight: bold;
 }
 
 .ingr-name {
-    max-width: 200px;
-    padding-left: 80px;
+    text-align: justify;
+    padding-left: 100px;
 }
 
 /* map: */

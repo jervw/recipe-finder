@@ -17,9 +17,11 @@ const apiKey = [
 
 // Index of selected API key
 var currentApi = 1;
+var conversionEnabled = 0;
+var lastRecipe;
 
 // Number of recipes to show on search.
-const numberOfResults = 9;
+const numberOfResults = 12;
 
 const form = document.getElementById("form-main");
 const formNav = document.getElementById("form-nav");
@@ -53,11 +55,13 @@ function submitForm(evt) {
 function onToggleClick(evt) {
     if (evt.classList.contains('off')) {
         evt.classList.remove('off');
-        console.log("on");
+        conversionEnabled = false;
     } else {
         evt.classList.add('off');
-        console.log("off");
+        conversionEnabled = true;
     }
+
+    document.querySelector(".ingredients-list").innerHTML = getIngredients(lastRecipe);
 }
 
 // Searches Spoonacular API with given search query. 
@@ -99,22 +103,13 @@ function onRecipeItemClick(id) {
 
 // Converts ingredient units to desired system and returns formatted ingredient string.
 function unitConversion(ingredient) {
-
-    let conversionEnabled = true;
-
+    let ingredientAmount = ingredient.measures["us"].amount;
     if (conversionEnabled) {
-        let ingredientAmount;
-
-        if (ingredient.measures["metric"].amount >= 100) {
-            ingredientAmount = Math.round((ingredient.measures["metric"].amount / 100) * 4) / 4;
-        } else {
-            ingredientAmount = ingredient.measures["metric"].amount;
-        }
-
-        return ingredientAmount + " " + ingredient.measures["metric"].unitShort + " " + `<p class='ingr-name'>` + ingredient.name + `</p>`;
+        ingredientAmount = Math.round(ingredient.measures["metric"].amount);
+        return "<p class='ingr-unit'>" + ingredientAmount + " " + ingredient.measures["metric"].unitShort + " " + `</p><p class='ingr-name'>` + ingredient.name + `</p>`;
     }
 
-    return ingredient.originalString;
+    return "<p class='ingr-unit'>" + ingredientAmount + " " + ingredient.measures["us"].unitShort + " " + `</p><p class='ingr-name'>` + ingredient.name + `</p>`;
 }
 
 
@@ -122,9 +117,10 @@ function unitConversion(ingredient) {
 
 // Loops through recipe ingredients and returns HTML with an list of ingredients.
 function getIngredients(recipe) {
+    lastRecipe = recipe;
     html = "";
     for (let i = 0; i < recipe.extendedIngredients.length; i++) {
-        html += `<div class="unit-name-container"> <p class='ingr-unit'>` + unitConversion(recipe.extendedIngredients[i]) + `</p> </div>`;
+        html += `<div class="unit-name-container">` + unitConversion(recipe.extendedIngredients[i]) + `</p> </div>`;
     }
     return html;
 }
@@ -168,7 +164,7 @@ function showRecipe(recipe) {
           </div>
           <img class="ohje-icon" src="img/ingr.png">
           <h2 class="ingredients-steps-title">Ingredients</h2>
-          ${getIngredients(recipe)}
+          <div class="ingredients-list">${getIngredients(recipe)}</div>
        </div>
     </div>
     <div class="col-2-2" >
