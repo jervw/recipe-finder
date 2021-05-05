@@ -572,6 +572,49 @@ ol li {
 
 
 
+/*Toggle button styling*/
+.toggleContainer {
+    position: relative;
+    width: 120px;
+    height: 30px;
+    border: thin solid #000;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .switch {
+    position: absolute;
+    width: 50%;
+    height: 99%;
+    background-color: #0000002c;
+    transition: all 0.15s ease;
+    border-radius: 10px;
+    left: 0;
+    z-index: 1;
+  }
+  
+  .toggleContainer.off {
+  
+    border: thin solid #000;
+  }
+  
+  .toggleContainer.off .switch {
+    left: 50%;
+    background-color: #0000002c;
+  }
+  .label {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    padding-top: 5px;
+  }
+  
+  .label.right {
+    left: 50%;
+  }
+
 
 footer {
     text-align: center;

@@ -16,25 +16,48 @@ const apiKey = [
     "dcb55105e1cb45c9a317c95ee1ba12ab"];
 
 // Index of selected API key
-var currentApi = 0;
+var currentApi = 1;
 
 // Number of recipes to show on search.
 const numberOfResults = 9;
 
+const form = document.getElementById("form-main");
+const formNav = document.getElementById("form-nav");
 const inputField = document.getElementById("inputField");
-const submit = document.getElementById("submit");
+const inputFieldNav = document.getElementById("inputField2");
+const submitNav = document.getElementById("submit2");
 const resultsContainer = document.querySelector(".results");
 const recipeContainer = document.querySelector(".recipe");
 const itemContainer = document.querySelector(".item");
 
-
-submit.addEventListener("click", submitField);
+form.addEventListener('submit', submitForm);
+formNav.addEventListener('submit', submitForm);
 
 
 // OnClick() function for a search field.
-function submitField(evt) {
+function submitForm(evt) {
     resultsContainer.innerHTML = "";
-    searchRecipe(inputField.value);
+    let fieldValue;
+    switch (evt.target.id) {
+        case "form-main":
+            fieldValue = inputField.value;
+            break;
+        case "form-nav":
+            fieldValue = inputFieldNav.value;
+            break;
+    }
+    searchRecipe(fieldValue);
+}
+
+// OnClick() function for a recipe unit toggle button.
+function onToggleClick(evt) {
+    if (evt.classList.contains('off')) {
+        evt.classList.remove('off');
+        console.log("on");
+    } else {
+        evt.classList.add('off');
+        console.log("off");
+    }
 }
 
 // Searches Spoonacular API with given search query. 
@@ -120,42 +143,46 @@ function showRecipe(recipe) {
     recipeContainer.innerHTML = `
     <div class="recipe-container">
     <div class="col-1-1">
-        <h1 class="title">${recipe.title}</h1>
-        
-        <div class="time-serv-container">
-            <div class="clock-container">
-                <img class="clock-icon" src="img/time-1.png">
-                <p class="readyInMinutes"> ${recipe.readyInMinutes} MIN</p>
-            </div>
-            <div class="serv-container">
-                <img class="clock-icon" src="img/serv-1.png">
-                <p class="servings">${recipe.servings} SERVES</p>
-            </div>
-        </div>
+       <h1 class="title">${recipe.title}</h1>
+       <div class="time-serv-container">
+          <div class="clock-container">
+             <img class="clock-icon" src="img/time-1.png">
+             <p class="readyInMinutes"> ${recipe.readyInMinutes} MIN</p>
+          </div>
+          <div class="serv-container">
+             <img class="clock-icon" src="img/serv-1.png">
+             <p class="servings">${recipe.servings} SERVES</p>
+          </div>
+       </div>
     </div>
     <div class="col-2-1">
-        <img class="image" src="${recipe.image}">
+       <img class="image" src="${recipe.image}">
     </div>
     <div class="col-1-2">
-        <div class="ingredients-card">
-            <img class="ohje-icon" src="img/ingr.png">
-            <h2 class="ingredients-steps-title">Ingredients</h2>
-            ${getIngredients(recipe)}
-        </div>
+       <div class="ingredients-card">
+          <div class="toggleContainer" id="toggleContainer" onclick="onToggleClick(this)">
+             <div class="switch" id="switch">
+             </div>
+             <div class="label left">US</div>
+             <div class="label right">Metric</div>
+          </div>
+          <img class="ohje-icon" src="img/ingr.png">
+          <h2 class="ingredients-steps-title">Ingredients</h2>
+          ${getIngredients(recipe)}
+       </div>
     </div>
     <div class="col-2-2" >
-        <div class="steps-card">
-             <img class="ohje-icon" src="img/ohje.png">
-             <h2 id="steps" class="ingredients-steps-title">Directions</h2>
-            <ol>
-                ${getInstructions(recipe)}
-            </ol>
-        </div>
+       <div class="steps-card">
+          <img class="ohje-icon" src="img/ohje.png">
+          <h2 id="steps" class="ingredients-steps-title">Directions</h2>
+          <ol>
+             ${getInstructions(recipe)}
+          </ol>
+       </div>
     </div>
-    </div>
+ </div>
     `;
 }
-
 
 
 

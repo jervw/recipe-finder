@@ -35,54 +35,48 @@
 
         <!--Search in top nav-->
         <div style="float:right" class="search-container">
-            <input type="text" class="searchTerm" placeholder="Search.." name="search" id="inputField2">
-            <button type="submit" class="searchButton" id="submit2"><i class="fa fa-search"></i></button>
+            <form id="form-nav" target="_">
+                <input type="text" class="searchTerm" placeholder="Search.." name="search" id="inputField2">
+                <button type="submit" class="searchButton" id="submit2"><i class="fa fa-search"></i></button>
+            </form>
         </div>
     </nav>
-
-    <script>
-        /* Changing background images of header */
-        var currentImage = 0;
-
-        function changeBackground() {
-            console.log("change background");
-
-            const images = [
-                'url("img/mansikat.png")',
-                'url("img/pitaleipa.png")',
-            ]
-            const headerDiv = document.getElementById("header");
-
-            bg = images[currentImage = ++currentImage % images.length];
-            headerDiv.style.backgroundImage = bg;
-        }
-        setInterval(changeBackground, 10000);
-    </script>
 
     <!--Tähän tulee headerin kuvat ja videot-->
     <div class="header" id="header"></div>
 
     <!--Main search-->
     <div class="main-search-container">
-        <input type="text" class="main-searchTerm" placeholder="Search.." name="search" id="inputField">
-        <button type="submit" class="main-searchButton" id="submit"><i class="fa fa-search"></i></button>
+        <form id="form-main" target="_">
+            <input type="text" class="main-searchTerm" placeholder="Search.." id="inputField">
+            <button type="submit" class="main-searchButton" id="submit"><i class="fa fa-search"></i></button>
+        </form>
     </div>
 
     <!--Tähän tulee hakutulokset-->
     <div class="results" id="results"></div>
 
+    <div class="toggleContainer" id="toggleContainer" onclick="onToggleClick(this)">
+        <div class="switch" id="switch">
+        </div>
+        <div class="label left">
+            <p>US</p>
+        </div>
+        <div class="label right">
+            <p>Metric</p>
+        </div>
+    </div>
+
+
+
     <!--Tähän tulee reseptien tiedot-->
     <div class="recipe"></div>
-    <br>
-    <br>
 
     <footer></footer>
 
-    <main>
-
-    </main>
-
+    <script src="js/header.js"></script>
     <script src="js/ajax.js"></script>
+    <iframe name="_" id="_" style="display: none;"></iframe>
 
 </body>
 
