@@ -31,7 +31,10 @@
         <input type="text" class="searchTerm" placeholder="Search.." name="search" id="inputField2">
         <button type="submit" class="searchButton" id="submit2"><i class="fa fa-search"></i></button>
     </div>
+
 </nav>
+
+
 
 <script>
     let currentImage = 0;
@@ -54,6 +57,20 @@
 <!--Tähän tulee headerin kuvat ja videot-->
 <div class="header" id="header"></div>
 
+<div id="route-finder">
+    <b>Start: </b>
+    <select id="start">
+        <option value="Current location">Current location</option>
+    </select>
+    <b>End: </b>
+    <select id="end">
+        <option value="test">Testi</option>
+        <option value="test2">Testi2</option>
+        <option value="test3">Testi3</option>
+        <option value="test4">Testi4</option>
+    </select>
+</div>
+
 <div class="main-search-container">
     <input type="text" class="main-searchTerm" placeholder="Search.." name="search" id="inputField">
     <button type="submit" class="main-searchButton" id="submit"><i class="fa fa-search"></i></button>
@@ -63,14 +80,14 @@
     <div class="map" id="map"></div>
 </div>
 
-
-
 <main>
 
 </main>
 
-    <script async src="https://maps.googleapis.com/maps/api/js?key=APKEY&libraries=places&callback=initMap"></script>
-    <script src="js/restaurant.js"></script>
+
+
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDohsiO3TI33d8qB10jeCMTwl72scDQVJU&libraries=places&v=beta&callback=initMap"></script>
+    <script src="js/pere.js"></script>
 
 </body>
 </html>

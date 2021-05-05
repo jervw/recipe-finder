@@ -74,7 +74,7 @@ body
     width: 100%;
     padding-top: 30px;
     padding-bottom: 30px;
-    position:fixed;
+    position:absolute;
     text-align:center
 }
 
@@ -86,6 +86,22 @@ body
     margin: 30px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+#route-finder {
+    position: absolute;
+    top: 10px;
+    left: 25px;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+
 
 
 

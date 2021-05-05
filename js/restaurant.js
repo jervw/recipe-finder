@@ -1,69 +1,50 @@
-let myHeaders = new Headers();
-myHeaders.append("Cookie", "__cfduid=d49b963c9b1790102868fa8a468e6f9571619076712");
-
-let requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-};
-
-const apiKey = "js/key.js.key";
 
 const inputField = document.getElementById("inputField");
 const submit = document.getElementById("submit");
 const resultsContainer = document.getElementById("results");
 
-const numberOfResults = 9;
+var imgsrc = "http://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=" + 1 + "|00FF00|000000&.png";
+var pinimg = new google.maps.MarkerImage(imgsrc);
 
 
-function submitField(evt) {
-    resultsContainer.innerHTML = "";
-    search(inputField.value);
-}
-/*
-function search(query) {
-    fetch("https://maps.googleapis.com/maps/api/js?key="+ apiKey + "=initMap", requestOptions)
-        .then(response => response.json())
-        .then(result => naytaTulokset(result))
-        .catch(error => console.log('error', error));
-
-}
-*/
-function naytaTulokset(result) {
-
-    console.log(result.totalResults);
-
-    for (let i = 0; i < numberOfResults; i++) {
-        resultsContainer.innerHTML +=
-            `<div class="item">
-            <img src="` + result.results[i].image + `" alt="` + result.results[i].title + `">
-            <p>` + result.results[i].title + `</p>
-            <br>
-          </div>`;
-    }
-}
 //Places related code
 
 let map;
+let marker;
 
 function initMap() {
-    let location = {
+    let userLocation = {
         lat: 60.224,
         lng: 24.758
     }
     let options = {
-        center: location,
+        center: userLocation,
+        radius: 8000,
+        types: ['restaurant','cafe'],
         zoom: 16
     }
+    let request = {
+        location: userLocation,
+        radius: 8000,
+        types: ['restaurant', 'cafe']
+    }
+
+
     if (navigator.geolocation) {
         console.log('geolocation info received');
 
         navigator.geolocation.getCurrentPosition((loc) => {
 
-            location.lat = loc.coords.latitude;
-            location.lng = loc.coords.longitude;
+            userLocation.lat = loc.coords.latitude;
+            userLocation.lng = loc.coords.longitude;
 
-            map = new google.maps.Map(document.getElementById("map"), options);
+
+            map = new google.maps.places.PlacesService(document.getElementById("map"), options);
+
+            addMarker(userLocation);
+
+            map.setOptions({ styles: styles["hide"] });
+
         },
             (err) => {
             console.log('Denied access to user location.');
@@ -79,7 +60,46 @@ function initMap() {
 
 }
 
+function addMarker() {
+    marker = new google.maps.Marker({
+        position: userLocation,
+        map: map,
+        icon: pinimg,
+    });
+}
+const styles = {
+    default: [],
+    hide: [
+        {
+            featureType: "poi.business",
+            stylers: [{ visibility: "off" }],
+        },
+        {
+            featureType: "transit",
+            elementType: "labels.icon",
+            stylers: [{ visibility: "off" }],
+        },
+    ],
+};
 submit.addEventListener("click", submitField);
+
+/*function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('inputField'),
+        {
+            types: ['restaurant', 'cafe', 'establishment'],
+            componentRestrinctions: {'country': ['FI']},
+            fields: ['place_id', 'geometry', 'name']
+        });
+        }
+*/
+document.getElementById("inputField")
+.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("submit").click();
+    }
+});
 
 /*const apiurl = "http://api.tvmaze.com/search/shows?q=";
 
