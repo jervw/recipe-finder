@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/jpg" href="img/serv-1.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Pacifico&family=Questrial&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--Top nav-->
+    <nav class="container2">
+        <input type="checkbox" id="click">
+        <ul>
+            <li><a href="index.html">Recipes</a></li>
+            <li><a href="restaurant.html">Restaurants</a></li>
+            <li><a class="active" href="blog.html">Blog</a></li>
+        </ul>
+
+        <div></div>
+
+        <div class="logo"><a href="index.html">A-team</a></div>
+
+        <label for="click" class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+
+        <!--Search in top nav-->
+        <div style="float:right" class="search-container">
+            <form action="index.html" id="form-nav">
+                <input type="text" class="searchTerm" placeholder="Search recipes" name="search" id="inputField2">
+                <button type="submit" class="searchButton" id="submit2"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </nav>
+
+    <h1 class="cwu">Cook with us!</h1>
+    <h3 class="episode">Episode 1: Greek salad</h3>
+
+    <!--Video-->
+    <video class="video" width="100%" controls muted>
+        <source src="video/greek-salad.mp4" type="video/mp4">
+        Your browser does not support HTML video.
+    </video>
+
+    <a href="img/synopsis-storyboard.jpg" download="synopsis-storyboard">
+        <p>Click here to download a synopsis & storyboard of video</p>
+    </a><br>
+
+
+    <div class="creators">
+        <h4>Website wizards</h4>
+        <p>Aarni Pesonen</p>
+        <p>Anna Raevskaia</p>
+        <p>Jere Vuola</p>
+    </div>
+
+    <script src="js/index.js"></script>
+
+</body>
+
+</html>

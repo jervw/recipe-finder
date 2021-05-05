@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Finder</title>
+    <link rel="shortcut icon" type="image/jpg" href="img/serv-1.png" />
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Pacifico&family=Questrial&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!--Top nav-->
+    <nav class="container2">
+        <input type="checkbox" id="click">
+        <ul>
+            <li><a class="active" href="index.html">Recipes</a></li>
+            <li><a href="restaurant.html">Restaurants</a></li>
+            <li><a href="blog.html">Blog</a></li>
+        </ul>
+
+        <div></div>
+
+        <div class="logo"><a href="index.html">A-team</a></div>
+
+        <label for="click" class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+
+        <!--Search in top nav-->
+        <div style="float:right" class="search-container">
+            <form id="form-nav" target="_dummy">
+                <input type="text" class="searchTerm" placeholder="Search a recipe" name="search" id="inputField2">
+                <button type="submit" class="searchButton" id="submit2"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </nav>
+
+    <!--Header-->
+    <div class="header" id="header"></div>
+
+    <!--Main search-->
+    <div class="main-search-container">
+        <form id="form-main" target="_dummy">
+            <input type="text" class="main-searchTerm" placeholder="Search recipes" id="inputField">
+            <button type="submit" class="main-searchButton" id="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
+    <!--Recipe search results-->
+    <div class="results" id="results"></div>
+
+    <!--Recipe details-->
+    <div class="recipe"></div>
+    <script src="js/header.js"></script>
+    <script src="js/index.js"></script>
+    <iframe name="_dummy" id="_dummy" style="display: none;"></iframe>
+
+</body>
+
+</html>

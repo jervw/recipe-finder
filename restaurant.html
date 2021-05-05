@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurants</title>
+    <link rel="shortcut icon" type="image/jpg" href="img/serv-1.png" />
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Pacifico&family=Questrial&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <!--Top nav-->
+    <nav class="container2">
+        <input type="checkbox" id="click">
+        <ul>
+            <li><a href="index.html">Recipes</a></li>
+            <li><a class="active" href="restaurant.html">Restaurants</a></li>
+            <li><a href="blog.html">Blog</a></li>
+        </ul>
+
+        <div></div>
+
+        <div class="logo"><a href="index.html">A-team</a></div>
+
+        <label for="click" class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+
+        <!--Search in top nav-->
+        <div style="float:right" class="search-container">
+            <form action="index.html" id="form-nav">
+                <input type="text" class="searchTerm" placeholder="Search recipes" name="search" id="inputField2">
+                <button type="submit" class="searchButton" id="submit2"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </nav>
+
+    <!--Header-->
+    <div class="header" id="header"></div>
+
+    <div id="route-finder">
+        <b>Start: </b>
+        <select id="start">
+            <option value="Current location">Current location</option>
+        </select>
+        <b>End: </b>
+        <select id="end">
+            <option value="test">Testi</option>
+            <option value="test2">Testi2</option>
+            <option value="test3">Testi3</option>
+            <option value="test4">Testi4</option>
+        </select>
+    </div>
+    <main>
+        <div class="map-and-results">
+            <div id="mapcontainer">
+                <div class="map" id="map"></div>
+            </div>
+            <div id="map-results-container"></div>
+        </div>
+
+    </main>
+
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDohsiO3TI33d8qB10jeCMTwl72scDQVJU&libraries=places&v=beta&callback=initMap"></script>
+    <script src="js/pere.js"></script>
+    <iframe name="_dummy" id="_dummy" style="display: none;"></iframe>
+
+</body>
+
+</html>
