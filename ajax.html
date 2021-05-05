@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe</title>
+    <title>Recipe finder</title>
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
@@ -21,13 +21,14 @@
         <input type="checkbox" id="click">
 
         <ul>
-            <li><a class="active" href="ajax.html">RESEPTIT</a></li>
-            <li><a href="restaurant.html">RAVINTOLAT</a></li>
+            <li><a class="active" href="ajax.html">Recipes</a></li>
+            <li><a href="restaurant.html">Restaurants</a></li>
+            <li><a href="video.html">Video</a></li>
         </ul>
 
         <div></div>
 
-        <div class="logo">A-TEAM</div>
+        <div class="logo"><a href="ajax.html">A-TEAM</a></div>
 
         <label for="click" class="menu-btn">
             <i class="fas fa-bars"></i>
@@ -36,7 +37,7 @@
         <!--Search in top nav-->
         <div style="float:right" class="search-container">
             <form id="form-nav" target="_">
-                <input type="text" class="searchTerm" placeholder="Search.." name="search" id="inputField2">
+                <input type="text" class="searchTerm" placeholder="Search recipes" name="search" id="inputField2">
                 <button type="submit" class="searchButton" id="submit2"><i class="fa fa-search"></i></button>
             </form>
         </div>
@@ -48,7 +49,7 @@
     <!--Main search-->
     <div class="main-search-container">
         <form id="form-main" target="_">
-            <input type="text" class="main-searchTerm" placeholder="Search.." id="inputField">
+            <input type="text" class="main-searchTerm" placeholder="Find a recipe" id="inputField">
             <button type="submit" class="main-searchButton" id="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
