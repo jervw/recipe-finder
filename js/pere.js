@@ -8,7 +8,7 @@ function initMap() {
     let directionsService = new google.maps.DirectionsService;
     let directionsDisplay = new google.maps.DirectionsRenderer;
 
-//Location of Karamalmi campus. Will be used if no user geolocation data is available
+    //Location of Karamalmi campus. Will be used if no user geolocation data is available
     let location = {
         lat: 60.224,
         lng: 24.758
@@ -25,11 +25,11 @@ function initMap() {
 
         navigator.geolocation.getCurrentPosition((loc) => {
 
-                location.lat = loc.coords.latitude;
-                location.lng = loc.coords.longitude;
+            location.lat = loc.coords.latitude;
+            location.lng = loc.coords.longitude;
 
-                map = new google.maps.Map(document.getElementById("map"), options);
-            },
+            map = new google.maps.Map(document.getElementById("map"), options);
+        },
             (err) => {
                 console.log('Denied access to user location.');
 
@@ -52,7 +52,7 @@ function initMap() {
 
     directionsDisplay.setMap(map);
 
-    let onChangeHandler = function() {
+    let onChangeHandler = function () {
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     };
     document.getElementById('start').addEventListener('change', onChangeHandler);
@@ -75,21 +75,15 @@ function initMap() {
 
     service.nearbySearch(request, callback);
 
-    for (let i = 0; i < results.length; i++) {
-        console.log(results[i].address);
-    }
 }
 
 function callback(results, status) {
     resultsArray = results;
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-        console.log(results.length);
         for (let i = 0; i < results.length; i++) {
-            console.log(results[i].name);
             createMarker(results[i]);
         }
     }
-    console.log(resultsArray[0]);
     displayRestaurants();
     calculateAndDisplayRoute();
 }
@@ -108,7 +102,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         origin: resultsArray[4],                 //document.getElementById('start').value,
         destination: resultsArray[2],           //document.getElementById('end').value,
         travelMode: 'DRIVING'
-    }, function(response, status) {
+    }, function (response, status) {
         if (status === 'OK') {
             directionsDisplay.setDirections(response);
         } else {

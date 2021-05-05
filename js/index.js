@@ -17,7 +17,7 @@ const apiKey = [
     "dcb55105e1cb45c9a317c95ee1ba12ab"];
 
 // Index of selected API key
-var currentApi = 1;
+var currentApi = 3;
 var conversionEnabled = 0;
 var lastRecipe;
 
@@ -35,6 +35,9 @@ const itemContainer = document.querySelector(".item");
 
 form.addEventListener('submit', submitForm);
 formNav.addEventListener('submit', submitForm);
+
+// Display random recipes
+randomRecipes();
 
 // OnClick() function for a search field.
 function submitForm(evt) {
@@ -93,7 +96,6 @@ function searchRecipe(query) {
 }
 
 function showResults(result) {
-
     for (let i = 0; i < numberOfResults; i++) {
         // Loops through search results and arranges recipe data to results container.
         resultsContainer.innerHTML +=
@@ -108,7 +110,6 @@ function showResults(result) {
 
 //OnClick() function for each recipe element. It has an ID parameter to know which element was clicked.
 function onRecipeItemClick(id) {
-
     // Hiding recipe results view and showing recipe page.
     resultsContainer.style.display = "none";
     recipeContainer.style.display = "block";
@@ -137,7 +138,7 @@ function unitConversion(ingredient) {
 // Loops through recipe ingredients and returns HTML with an list of ingredients.
 function getIngredients(recipe) {
     lastRecipe = recipe;
-    html = "";
+    let html = "";
     for (let i = 0; i < recipe.extendedIngredients.length; i++) {
         html += `<div class="unit-name-container">` + unitConversion(recipe.extendedIngredients[i]) + `</p> </div>`;
     }
@@ -146,7 +147,7 @@ function getIngredients(recipe) {
 
 // Loops through recipe instructions and returns HTML with an ordered list.
 function getInstructions(recipe) {
-    html = "";
+    let html = "";
     for (let i = 0; i < recipe.analyzedInstructions[0].steps.length; i++) {
         html += `<li>` + recipe.analyzedInstructions[0].steps[i].step + `</li>`;
     }
@@ -156,7 +157,7 @@ function getInstructions(recipe) {
 // Arranges recipe data to recipe container using innerHTML.
 function showRecipe(recipe) {
     recipeContainer.innerHTML = `
-    <div class="back-button"><a href="ajax.html"><img src="img/nuoli-icon.png"></a></div>
+    <div class="back-button"><a href="index.html"><img src="img/nuoli-icon.png"></a></div>
     <div class="recipe-container">
     <div class="col-1-1">
        <h1 class="title">${recipe.title}</h1>
