@@ -58,9 +58,6 @@ body
     font-weight: bold;
 }
 
-<<<<<<< HEAD
-/* If screen width is < 920px */
-=======
 #mapcontainer {
     height: 80%;
     width: 100%;
@@ -98,7 +95,6 @@ body
 
 
 /* If screen width is <= 920px: */
->>>>>>> origin/aarni-dev
 @media screen and (max-width: 920px) {
 
     .search-container {
