@@ -290,7 +290,7 @@ input[type="checkbox"]{
         content: "\f00d";
     }
     nav ul{
-        position: fixed;
+        position:absolute;
         top: 55px;
         left: -100%;
         background: #ffffff;
@@ -343,6 +343,10 @@ input[type="checkbox"]{
     max-width: 310px;
     min-width: 200px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.item-title{
+    padding: 15px;
 }
 
 .image-box img {

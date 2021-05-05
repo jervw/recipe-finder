@@ -14,10 +14,11 @@ const apiKey = [
     "0b02b34a3d03459684b2e75f78070faf",
     "79edc81463084c748c02be93655d351f",
     "b126b486227f44c68a49b6779d33f513",
-    "dcb55105e1cb45c9a317c95ee1ba12ab"];
+    "dcb55105e1cb45c9a317c95ee1ba12ab",
+    "7d9e4bdb19b0458cbe5236ca9a425426"];
 
 // Index of selected API key
-var currentApi = 3;
+var currentApi = 4;
 var conversionEnabled = 0;
 var lastRecipe;
 
@@ -78,13 +79,19 @@ function randomRecipes() {
 function showRandomRecipes(result) {
     resultsContainer.innerHTML = "";
     // Loops through search results and arranges recipe data to results container.
+
     for (let i = 0; i < numberOfResults; i++) {
-        resultsContainer.innerHTML +=
-            `<div class="item" id="${result.recipes[i].id}" onClick="onRecipeItemClick(this.id)">
+
+        if (result.recipes[i].image != null) {
+
+            resultsContainer.innerHTML +=
+                `<div class="item" id="${result.recipes[i].id}" onClick="onRecipeItemClick(this.id)">
                 <div class="image-box"><img width="312" height="231" src="${result.recipes[i].image}" alt="${result.recipes[i].title}"></div>
-                <p>${result.recipes[i].title}</p><br>
-            </div>`;
+                <p class="item-title">${result.recipes[i].title}</p>
+                </div>`;
+        }
     }
+
 }
 
 // Searches Spoonacular API with given search query.
@@ -97,12 +104,16 @@ function searchRecipe(query) {
 
 function showResults(result) {
     for (let i = 0; i < numberOfResults; i++) {
-        // Loops through search results and arranges recipe data to results container.
-        resultsContainer.innerHTML +=
-            `<div class="item" id="${result.results[i].id}" onClick="onRecipeItemClick(this.id)">
-                <div class="image-box"><img src="${result.results[i].image}" alt="${result.results[i].title}"></div>
-                <p>${result.results[i].title}</p><br>
+        if (result.results[i].image != null) {
+
+            // Loops through search results and arranges recipe data to results container.
+            resultsContainer.innerHTML +=
+                `<div class="item" id="${result.results[i].id}" onClick="onRecipeItemClick(this.id)">
+            <div class="image-box"><img src="${result.results[i].image}" alt="${result.results[i].title}"></div>
+            <p class="item-title">${result.results[i].title}</p>
             </div>`;
+
+        }
     }
 }
 
